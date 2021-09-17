@@ -1,0 +1,50 @@
+<th:block xmlns:th="http://www.thymeleaf.org">
+    <section class="jumbotron text-center">
+        <div class="container">
+            <h3 class="jumbotron-heading">Shopping cart for
+                <th:block th:if="${#request.getRemoteUser() != null}" th:text="${#request.getRemoteUser()}"></th:block>
+            </h3>
+        </div>
+    </section>
+
+    <div th:if="${hasError}">
+        <h5 class="text-center text-danger" th:text="${error}"></h5>
+    </div>
+
+    <div class="container mb-4">
+        <div class="row">
+            <div class="col-12" th:if="${videoGames.size() > 0}">
+                <div class="table-responsive">
+                    <table class="table table-striped">
+                        <thead>
+                        <tr>
+                            <th scope="col">Game image</th>
+                            <th scope="col">Game name</th>
+                            <th scope="col">Price</th>
+                            <th scope="col">Game description</th>
+                            <th scope="col">Publisher</th>
+                            <th scope="col">Category</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="videoGame : ${videoGames}">
+                            <td>
+                                <img th:src="${videoGame.getImgUrl()}" style="max-height: 220px; max-width: 330px">
+                            </td>
+                            <td th:text="${videoGame.getName()}"></td>
+                            <td th:text="${videoGame.getPrice()}"></td>
+                            <td th:text="${videoGame.getDescription()}"></td>
+                            <td th:text="${videoGame.getPublisher() != null} ? ${videoGame.getPublisher().getName()} : 'No Publisher'"></td>
+                            <td th:text="${videoGame.getCategory() != null} ? ${videoGame.getCategory().getName()} : 'No Category'"></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</th:block>
+
+
+
+
